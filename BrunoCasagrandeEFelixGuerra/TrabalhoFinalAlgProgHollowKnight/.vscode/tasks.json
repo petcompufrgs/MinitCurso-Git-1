@@ -1,0 +1,60 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build with Raylib",
+            "type": "shell",
+            "command": "gcc",
+            "args": [
+                "main.c",
+                "src/amuleto.c",
+                "src/chefe.c",
+                "src/habilidade.c",
+                "src/hud.c",
+                "src/inimigo.c",
+                "src/jogador.c",
+                "src/mapa.c",
+                "src/menu.c",
+                "src/save.c",
+                "-o", "main.exe",
+                "-Iexternal/include",
+                "-Iinclude",
+                "-Isrc",
+                "-Lexternal/lib",
+                "-lraylibdll",
+                "-lopengl32",
+                "-lgdi32",
+                "-lwinmm"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": ["$gcc"],
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "Run Game",
+            "type": "shell",
+            "command": "powershell",
+            "args": [
+                "-Command",
+                "Copy-Item external/lib/raylib.dll . -Force; .\\main.exe"
+            ],
+            "dependsOn": "Build with Raylib",
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            }
+        }
+    ]
+}
